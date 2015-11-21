@@ -1,0 +1,91 @@
+﻿@model gLibrary.Models.Dish
+
+@{
+    ViewBag.Title = "Dish - Edit";
+}
+
+<h2 class="delete-title">Edit Dish</h2>
+
+@using (Html.BeginForm("Edit", "Dish", FormMethod.Post, new { enctype="multipart/form-data"}))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Dish</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RestaurantId)
+
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Bilingual.Name)
+            </div>
+            <div class="line-right">
+                @Html.EditorFor(model => model.Bilingual.Name)
+                @Html.ValidationMessageFor(model => model.Bilingual.Name)
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Bilingual.AlienName)
+            </div>
+            <div class="line-right">
+                @Html.EditorFor(model => model.Bilingual.AlienName)
+                @Html.ValidationMessageFor(model => model.Bilingual.AlienName)
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Introduction)
+            </div>
+            <div class="line-right">
+                @Html.TextAreaFor(model => model.Introduction)
+                @Html.ValidationMessageFor(model => model.Introduction)
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">@Html.LabelFor(model => model.CategoryId)</div>
+            <div class="line-right">
+                @Html.DropDownListFor(model => model.CategoryId, (SelectList)ViewBag.Category, Model.CategoryId)
+                @Html.ValidationMessageFor(model => model.CategoryId)
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Price)
+            </div>
+            <div class="line-right">
+                @Html.EditorFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.DishImage)
+
+        <div class="line">
+            <div class="line-left">@Html.LabelFor(model => model.DishImage)</div>
+
+            <div class="line-right">
+                <div id="image-file">
+                    <input type="file" id="file" name="file" />
+                </div>
+                <div id="dish-image">
+                    <img id="image" alt="@Url.Content(Model.Bilingual.FullName)" src="@Url.Content(Model.ImageFolder +  Model.DishImage)" />
+                </div>
+            </div>
+        </div>
+
+        <p  class="delete-title">
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { rid = Model.RestaurantId })
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/gMnt/dish.js")" type="text/javascript"></script>
+}
+
+

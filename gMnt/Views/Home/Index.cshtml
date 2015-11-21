@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<h3>Main Menu:</h3>
+<ol class="round">
+    <li class="one">
+        @Html.ActionLink("Categories", "Index", "Category")
+    </li>
+    <li class="two">
+        @Html.ActionLink("Dishes", "Index", "Dish")
+    </li>
+    <li class="three">
+        @Html.ActionLink("Restaurants", "Index", "Restaurant")
+    </li>
+    <li class="four">
+        @Html.ActionLink("Tables", "Index", "Table")
+    </li>
+</ol>

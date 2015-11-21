@@ -1,0 +1,31 @@
+﻿@model IEnumerable<gLibrary.Models.Dish>
+
+@{
+    ViewBag.Title = "Dishes";
+}
+
+<h2>Dishes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { rid = @ViewBag.rid })
+</p>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="items">
+        <td>
+            @Html.DisplayFor(modelItem => item.Bilingual.FullName)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
+        </td>
+    </tr>
+}
+
+</table>

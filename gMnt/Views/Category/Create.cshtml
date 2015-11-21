@@ -1,0 +1,52 @@
+﻿@model gLibrary.Models.Category
+
+@{
+    ViewBag.Title = "Category - New";
+}
+
+<h2>New Category</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Category</legend>
+
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Bilingual.Name)
+            </div>
+            <div class="line-right">
+                @Html.EditorFor(model => model.Bilingual.Name)
+                @Html.ValidationMessageFor(model => model.Bilingual.Name)
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Bilingual.AlienName)
+            </div>
+            <div class="line-right">
+                @Html.EditorFor(model => model.Bilingual.AlienName)
+                @Html.ValidationMessageFor(model => model.Bilingual.AlienName)
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Restaurant)
+            </div>
+            <div class="line-right">
+                @Html.DropDownListFor(model => model.RestaurantId, (SelectList)ViewBag.Restaurant, String.Empty)
+                @Html.ValidationMessageFor(model => model.Bilingual.AlienName)
+            </div>
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

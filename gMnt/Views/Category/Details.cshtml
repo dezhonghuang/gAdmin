@@ -1,0 +1,31 @@
+﻿@model gLibrary.Models.Category
+
+@{
+    ViewBag.Title = "Category - Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Category</legend>
+
+    <div class="line">
+        <div class="line-left">Name</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Bilingual.Name)
+        </div>
+    </div>
+
+    <div class="line">
+        <div class="line-left">Alien Name</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Bilingual.AlienName)
+        </div>
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

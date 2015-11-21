@@ -1,0 +1,54 @@
+﻿@model gLibrary.Models.Dish
+
+@{
+    ViewBag.Title = "Dish - Details";
+}
+
+<h2>Dish Details</h2>
+
+<fieldset>
+    <legend>Dish</legend>
+
+    <div class="line">
+        <div class="line-left">Name</div>
+        <div class="line-right">
+            @Html.DisplayFor(m => m.Bilingual.Name)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Alien Name</div>
+        <div class="line-right">
+            @Html.DisplayFor(m => m.Bilingual.AlienName)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Introduction</div>
+        <div class="line-right">
+            @Html.DisplayFor(m => m.Introduction)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Category</div>
+        <div class="line-right">
+            @Html.DisplayFor(m => m.Category.Name)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Price</div>
+        <div class="line-right">
+            @Html.DisplayFor(m => m.Price)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Image</div>
+        <div class="line-right">
+            <img id="image" alt="@Url.Content(Model.Bilingual.FullName)" src="@Url.Content(Model.ImageFolder + Model.DishImage)" />
+        </div>
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,6 @@
+﻿@model gLibrary.Models.Table
+<div id="qr-content">
+<p class="qrcode-print">Scan + Order</p>
+<img alt="QR Code" src="@Url.Action("GenerateQRCode", new { tid=Model.Id, rid = Model.RestaurantId })" />
+<p class="qrcode-print">扫一扫 + 点菜</p>
+    </div>

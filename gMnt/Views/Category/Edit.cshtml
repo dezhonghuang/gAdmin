@@ -1,0 +1,55 @@
+﻿@model gLibrary.Models.Category
+
+@{
+    ViewBag.Title = "Category - Edit";
+}
+
+<h2 class="delete-title">Edit Category</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Category</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Bilingual.Name)
+            </div>
+            <div class="line-right">
+                @Html.EditorFor(model => model.Bilingual.Name)
+                @Html.ValidationMessageFor(model => model.Bilingual.Name)
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.Bilingual.AlienName)
+            </div>
+            <div class="line-right">
+                @Html.EditorFor(model => model.Bilingual.AlienName)
+                @Html.ValidationMessageFor(model => model.Bilingual.AlienName)
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">
+                @Html.LabelFor(model => model.RestaurantId)
+            </div>
+            <div class="line-right">
+                @Html.DropDownListFor(model => model.RestaurantId, (SelectList)ViewBag.Restaurant)
+                @Html.ValidationMessageFor(model => model.RestaurantId)
+            </div>
+        </div>
+
+        <p class="delete-title">
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

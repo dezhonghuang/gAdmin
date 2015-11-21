@@ -1,0 +1,55 @@
+﻿@model gLibrary.Models.Restaurant
+
+@{
+    ViewBag.Title = "Restaurant - Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Restaurant</legend>
+
+    <div class="line">
+        <div class="line-left">@Html.LabelFor(model => model.Id)</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Id)
+        </div>
+    </div>
+
+    <div class="line">
+        <div class="line-left">@Html.LabelFor(model => model.Bilingual.Name)</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Bilingual.Name)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">@Html.LabelFor(model => model.Bilingual.AlienName)</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Bilingual.AlienName)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">@Html.LabelFor(model => model.Address.FullAddress)</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Address.FullAddress)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">@Html.LabelFor(model => model.Phone)</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Phone)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">@Html.LabelFor(model => model.Logo)</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Logo)
+        </div>
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

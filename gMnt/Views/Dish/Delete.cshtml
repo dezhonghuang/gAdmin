@@ -1,0 +1,58 @@
+﻿@model gLibrary.Models.Dish
+
+@{
+    ViewBag.Title = "Dish - Delete";
+}
+
+<h2>Delete Dish</h2>
+
+<h3 class="delete-title">Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Dish</legend>
+
+    <div class="line">
+        <div class="line-left">Name</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Bilingual.Name)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Alien Name</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Bilingual.AlienName)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Introduction</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Introduction)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Category</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Category.Name)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Price</div>
+        <div class="line-right">
+            @Html.DisplayFor(model => model.Price)
+        </div>
+    </div>
+    <div class="line">
+        <div class="line-left">Image</div>
+
+        <div class="line-right">
+            <div class="dish-image">
+                <img id="image" alt="Dish Image" src="@Url.Content(Model.ImageFolder + Model.DishImage)" />
+            </div>
+        </div>
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p class="delete-title">
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index", new { rid = Model.RestaurantId })
+    </p>
+}

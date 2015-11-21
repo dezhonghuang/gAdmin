@@ -1,0 +1,27 @@
+﻿@model gLibrary.Models.Table
+
+@{
+    ViewBag.Title = "Table - Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Table</legend>
+
+    <div class="display-label">Seats</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Seats)
+    </div>
+
+    <div class="display-label">Restaurant</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Restaurant.Bilingual.FullName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("QR Code", "QRCode", new { id=Model.Id, rid=Model.RestaurantId }) |
+    @Html.ActionLink("Delete", "Delete", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
