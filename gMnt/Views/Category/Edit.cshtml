@@ -14,6 +14,7 @@
         <legend>Category</legend>
 
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RestaurantId)
 
         <div class="line">
             <div class="line-left">
@@ -33,15 +34,6 @@
                 @Html.ValidationMessageFor(model => model.Bilingual.AlienName)
             </div>
         </div>
-        <div class="line">
-            <div class="line-left">
-                @Html.LabelFor(model => model.RestaurantId)
-            </div>
-            <div class="line-right">
-                @Html.DropDownListFor(model => model.RestaurantId, (SelectList)ViewBag.Restaurant)
-                @Html.ValidationMessageFor(model => model.RestaurantId)
-            </div>
-        </div>
 
         <p class="delete-title">
             <input type="submit" value="Save" />
@@ -50,6 +42,6 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rid = Model.RestaurantId })
 </div>
 

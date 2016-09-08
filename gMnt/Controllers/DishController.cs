@@ -13,16 +13,18 @@ using gLibrary.DAL;
 
 namespace gMnt.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class DishController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork();
         //
         // GET: /Dish/
 
-        public ActionResult Index()
+        public ActionResult Index(int rid)
         {
-            var dishes = _unitOfWork.GetRepository<Dish>().Get(includeProperties: "Category").OrderBy(d => d.CategoryId);
+            ViewBag.RestaurantId = rid;
+
+            var dishes = _unitOfWork.GetRepository<Dish>().Get(d => d.RestaurantId == rid, includeProperties: "Category").OrderBy(d => d.CategoryId);
 
             return View(dishes);
         }
@@ -40,12 +42,13 @@ namespace gMnt.Controllers
         //
         // GET: /Dish/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int rid)
         {
-            SetCategories(-1, gMnts.NoSelection);
-            SetRestaurants();
+            var dish = new Dish();
+            dish.RestaurantId = rid;
+            SetCategories(dish.RestaurantId);
 
-            return View();
+            return View(dish);
         }
 
         //
@@ -71,7 +74,6 @@ namespace gMnt.Controllers
             catch
             {
                 SetCategories(-1, dish.CategoryId);
-                SetRestaurants(dish.RestaurantId);
 
                 return View(dish);
             }
@@ -85,7 +87,7 @@ namespace gMnt.Controllers
             var dish = _unitOfWork.GetRepository<Dish>().GetByID(id);
 
             if (dish == null)
-                RedirectToAction("Index");
+                RedirectToAction("Index", new { rid = dish.RestaurantId });
 
             SetCategories(dish.RestaurantId, dish.CategoryId);
 
@@ -112,7 +114,9 @@ namespace gMnt.Controllers
                 _unitOfWork.GetRepository<Dish>().Update(dish);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { Id = dish.Id });
+
+                //return RedirectToAction("Index", new { rid = dish.RestaurantId });
             }
             catch
             {
@@ -130,7 +134,7 @@ namespace gMnt.Controllers
             var dish = _unitOfWork.GetRepository<Dish>().GetByID(id);
 
             if (dish == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = dish.RestaurantId });
 
             return View(dish);
         }
@@ -147,14 +151,24 @@ namespace gMnt.Controllers
                 _unitOfWork.GetRepository<Dish>().Delete(dish.Id);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = dish.RestaurantId });
             }
             catch
             {
                 return View(dish);
             }
         }
-        
+
+        public ActionResult DishImage(int id)
+        {
+            Dish dish = _unitOfWork.GetRepository<Dish>().GetByID(id);
+
+            if (dish.DishImage.Length == 0)
+                return Json("");
+
+            return PartialView("_dishImage", dish);
+        }
+
         public JsonResult CategoryList(int rid)
         {
             var categories = from c in _unitOfWork.GetRepository<Category>().Get(c => c.RestaurantId == rid)
@@ -172,17 +186,18 @@ namespace gMnt.Controllers
             ViewBag.Category = new SelectList(GetCategories(rid), "Id", "Bilingual.Name", selectedCategory);
         }
 
-        private void SetRestaurants(object selectedRestaurant = null)
-        {
-            ViewBag.RestaurantId = new SelectList(_unitOfWork.GetRepository<Restaurant>().Get(), "Id", "Bilingual.Name", selectedRestaurant);
-        }
-
         private IEnumerable<Category> GetCategories(int rid)
         {
             var categories = from c in _unitOfWork.GetRepository<Category>().Get(c => c.RestaurantId == rid)
                              select c;
 
             return categories;
+        }
+
+        private void SetRestaurants(object selectedRestaurant = null)
+        {
+            //ViewBag.RestaurantId = new SelectList(_unitOfWork.GetRepository<Restaurant>().Get(), "Id", "Bilingual.Name", selectedRestaurant);
+            ViewBag.RestaurantId = new SelectList(_unitOfWork.GetRepository<Restaurant>().Get(), "Id", "Bilingual.Name", selectedRestaurant);
         }
     }
 }

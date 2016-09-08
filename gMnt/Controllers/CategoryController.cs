@@ -8,7 +8,7 @@ using gLibrary.DAL;
 
 namespace gMnt.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CategoryController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork();
@@ -16,9 +16,11 @@ namespace gMnt.Controllers
         //
         // GET: /Category/
 
-        public ActionResult Index()
+        public ActionResult Index(int rid)
         {
-            return View(_unitOfWork.GetRepository<Category>().Get());
+            ViewBag.RestaurantId = rid;
+
+            return View(_unitOfWork.GetRepository<Category>().Get(c => c.RestaurantId == rid));
         }
 
         //
@@ -34,11 +36,14 @@ namespace gMnt.Controllers
         //
         // GET: /Category/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int rid)
         {
-            SetRestaurantViewBag(gMnts.NoSelection);
+            //SetRestaurantViewBag(gMnts.NoSelection);
+            //ViewBag.RestaurantId = rid;
+            var category = new Category();
+            category.RestaurantId = rid;
 
-            return View();
+            return View(category);
         }
 
         //
@@ -53,12 +58,10 @@ namespace gMnt.Controllers
                 _unitOfWork.GetRepository <Category>().Insert(category);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = category.RestaurantId });
             }
             catch
             {
-                SetRestaurantViewBag(category.RestaurantId);
-
                 return View(category);
             }
         }
@@ -69,7 +72,6 @@ namespace gMnt.Controllers
         public ActionResult Edit(int id)
         {
             var category = _unitOfWork.GetRepository <Category>().GetByID(id);
-            SetRestaurantViewBag(category.RestaurantId);
 
             return View(category);
         }
@@ -86,11 +88,11 @@ namespace gMnt.Controllers
                 _unitOfWork.GetRepository <Category>().Update(category);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = category.RestaurantId });
             }
             catch
             {
-                SetRestaurantViewBag(category.RestaurantId);
+                //SetRestaurantViewBag(category.RestaurantId);
 
                 return View(category);
             }
@@ -102,8 +104,9 @@ namespace gMnt.Controllers
         public ActionResult Delete(int id)
         {
             var category = _unitOfWork.GetRepository <Category>().GetByID(id);
+
             if (category == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = category.RestaurantId });
 
             return View(category);
         }
@@ -114,24 +117,27 @@ namespace gMnt.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            //reserve the restaurant id
+            var category = _unitOfWork.GetRepository<Category>().GetByID(id);
+
             try
             {
                 // TODO: Add delete logic here
                 _unitOfWork.GetRepository<Category>().Delete(id);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = category.RestaurantId });
             }
             catch
             {
-                return View();
+                return View(category);
             }
         }
         
 
-        private void SetRestaurantViewBag(object selectedRestaurant)
+        /* private void SetRestaurantViewBag(object selectedRestaurant)
         {
             ViewBag.Restaurant = new SelectList(_unitOfWork.GetRepository<Restaurant>().Get(), "Id", "Bilingual.FullName", selectedRestaurant);
-        }
+        } */
     }
 }

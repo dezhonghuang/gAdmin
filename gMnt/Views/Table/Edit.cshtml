@@ -14,7 +14,14 @@
     <fieldset>
         <legend>Table</legend>
 
+        @Html.HiddenFor(model => model.RestaurantId)
+        @Html.HiddenFor(model => model.TableNumber)
+        
         @Html.HiddenFor(model => model.Id)
+        <div class="display-label">Table #</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.TableNumber)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Seats)
@@ -24,14 +31,6 @@
             @Html.ValidationMessageFor(model => model.Seats)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RestaurantId)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(model => model.RestaurantId, (SelectList)ViewBag.Restaurant, String.Empty)
-            @Html.ValidationMessageFor(model => model.RestaurantId)
-        </div>
-
         <p>
             <input type="submit" value="Save" />
         </p>
@@ -39,5 +38,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rid = Model.RestaurantId })
 </div>

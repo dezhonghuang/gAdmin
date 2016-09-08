@@ -40,9 +40,12 @@
         </div>
     </div>
     <div class="line">
-        <div class="line-left">Image</div>
+        <div class="line-left">
+            Image
+        </div>
         <div class="line-right">
-            <img id="image" alt="@Url.Content(Model.Bilingual.FullName)" src="@Url.Content(Model.ImageFolder + Model.DishImage)" />
+            <div id="dish-image">
+            </div>
         </div>
     </div>
 
@@ -50,5 +53,10 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
     @Html.ActionLink("Delete", "Delete", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rid = Model.RestaurantId })
 </p>
+
+@section Scripts {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/gMnt/test1.js")">
+    </script>
+}

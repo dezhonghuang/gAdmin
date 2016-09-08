@@ -4,15 +4,15 @@
     ViewBag.Title = "Restaurant - Details";
 }
 
-<h2>Details</h2>
+<h2>    @Html.ActionLink("<- Restaurants", "Index")</h2>
 
 <fieldset>
     <legend>Restaurant</legend>
 
     <div class="line">
-        <div class="line-left">@Html.LabelFor(model => model.Id)</div>
+        <!-- <div class="line-left">@Html.LabelFor(model => model.Id)</div> -->
         <div class="line-right">
-            @Html.DisplayFor(model => model.Id)
+            @Html.HiddenFor(model => model.Id)
         </div>
     </div>
 
@@ -48,8 +48,15 @@
     </div>
 
 </fieldset>
+<ul>
+                    <li>@Html.ActionLink("Categories", "Index", "Category", new { rid = Model.Id }, null)</li>
+                    <li>@Html.ActionLink("Tables", "Index", "Table", new { rid = Model.Id }, null)</li>
+                    <li>@Html.ActionLink("Dishes", "Index", "Dish", new { rid = Model.Id }, null)</li>
+</ul>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
     @Html.ActionLink("Delete", "Delete", new { id=Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+

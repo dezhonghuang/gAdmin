@@ -31,15 +31,7 @@
                 @Html.ValidationMessageFor(model => model.Bilingual.AlienName)
             </div>
         </div>
-        <div class="line">
-            <div class="line-left">
-                @Html.LabelFor(model => model.Restaurant)
-            </div>
-            <div class="line-right">
-                @Html.DropDownListFor(model => model.RestaurantId, (SelectList)ViewBag.Restaurant, String.Empty)
-                @Html.ValidationMessageFor(model => model.Bilingual.AlienName)
-            </div>
-        </div>
+        @Html.HiddenFor(model => model.RestaurantId)
 
         <p>
             <input type="submit" value="Create" />
@@ -48,5 +40,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rid = Model.RestaurantId })
 </div>

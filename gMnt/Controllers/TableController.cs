@@ -13,16 +13,18 @@ using gLibrary.Models;
 
 namespace gMnt.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class TableController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork();
         //
         // GET: /Table/
 
-        public ActionResult Index()
+        public ActionResult Index(int rid)
         {
-            var tables = _unitOfWork.GetRepository<Table>().Get();
+            ViewBag.RestaurantId = rid;
+
+            var tables = _unitOfWork.GetRepository<Table>().Get(t => t.RestaurantId == rid);
 
             return View(tables);
         }
@@ -89,11 +91,12 @@ namespace gMnt.Controllers
         //
         // GET: /Table/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int rid)
         {
-            SetRestaurantViewBag(gMnts.NoSelection);
+            var table = new Table();
+            table.RestaurantId = rid;
 
-            return View();
+            return View(table);
         }
 
         //
@@ -107,12 +110,10 @@ namespace gMnt.Controllers
                 _unitOfWork.GetRepository<Table>().Insert(table);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = table.RestaurantId });
             }
             catch
             {
-                SetRestaurantViewBag(table.RestaurantId);
-
                 return View(table);
             }
         }
@@ -123,7 +124,6 @@ namespace gMnt.Controllers
         public ActionResult Edit(int id)
         {
             var table = _unitOfWork.GetRepository<Table>().GetByID(id);
-            SetRestaurantViewBag(table.RestaurantId);
 
             return View(table);
         }
@@ -139,12 +139,10 @@ namespace gMnt.Controllers
                 _unitOfWork.GetRepository<Table>().Update(table);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = table.RestaurantId });
             }
             catch
             {
-                SetRestaurantViewBag(table.RestaurantId);
-
                 return View(table);
             }
         }
@@ -156,7 +154,7 @@ namespace gMnt.Controllers
         {
             var table = _unitOfWork.GetRepository<Table>().GetByID(id);
             if (table == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = table.RestaurantId });
 
             return View(table);
         }
@@ -167,23 +165,22 @@ namespace gMnt.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            // save a copy of the table variable
+            var table = _unitOfWork.GetRepository<Table>().GetByID(id);
+
             try
             {
+
                 // TODO: Add delete logic here
                 _unitOfWork.GetRepository<Table>().Delete(id);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { rid = table.RestaurantId});
             }
             catch
             {
-                return View();
+                return View(table);
             }
-        }
-
-        private void SetRestaurantViewBag(object selectedRestaurant)
-        {
-            ViewBag.Restaurant = new SelectList(_unitOfWork.GetRepository<Restaurant>().Get(), "Id", "Bilingual.FullName", selectedRestaurant);
         }
     }
 }

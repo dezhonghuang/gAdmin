@@ -4,10 +4,11 @@
     ViewBag.Title = "Tables";
 }
 
+<h2>@Html.ActionLink("<-- Restaurant", "Index", "Restaurant")</h2>
 <h2>Tables</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { rid = ViewBag.RestaurantId })
 </p>
 <table>
     <tr>

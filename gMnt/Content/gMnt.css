@@ -61,7 +61,7 @@ ul.dishes a {
 .line-left {
     float:left;
     width:30%;
-    text-align:right;
+    text-align:left;
 }
 
 .line-right {
@@ -152,4 +152,8 @@ p.qrcode-print {
     color: #ff9900;
 }
 
+/* text area */
 
+#Introduction {
+    width: 160px;
+}

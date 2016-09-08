@@ -12,13 +12,8 @@
     <fieldset>
         <legend>Dish</legend>
 
-        <div class="line">
-            <div class="line-left">@Html.LabelFor(model => model.RestaurantId)</div>
-            <div class="line-right">
-                @Html.DropDownListFor(model => model.RestaurantId, (SelectList)ViewBag.RestaurantId, String.Empty)
-                @Html.ValidationMessageFor(model => model.RestaurantId)
-            </div>
-        </div>
+        @Html.HiddenFor(model => model.RestaurantId)
+
         <div class="line">
             <div class="line-left">
                 @Html.LabelFor(model => model.Bilingual.Name)
@@ -70,10 +65,9 @@
             </div>
             <div class="line-right">
                 <div id="image-file"><input type="file" id="file" name="file" /></div>
+            </div>
+            <div id="dish-image">
 
-                <div id="dish-image">
-                    <img id="image" alt="Dish Image" src="@Url.Content("~/Images/Dishes/Empty.png")" />
-                </div>
             </div>
         </div>
 
@@ -84,10 +78,10 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { rid = Model.RestaurantId })
 </div>
 
 @section Scripts {
-    <script src="@Url.Content("~/Scripts/gMnt/dish.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/gMnt/test1.js")"></script>
 }
 

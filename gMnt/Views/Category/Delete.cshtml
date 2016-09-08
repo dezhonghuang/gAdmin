@@ -31,6 +31,6 @@
     @Html.AntiForgeryToken()
     <p class="delete-title">
         <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index", new { rid = Model.RestaurantId })
     </p>
 }

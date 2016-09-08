@@ -87,6 +87,15 @@ namespace gMnt.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Address")]
+        public string Email { get; set; }
+
+        public int? RestaurantId { get; set; }
+
+        public DateTime CreateDate { get; set; }
+        public string Comment { get; set; }
     }
 
     public class ExternalLogin

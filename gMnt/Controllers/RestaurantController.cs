@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ using MessagingToolkit.QRCode.Codec;
 
 namespace gMnt.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class RestaurantController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork();

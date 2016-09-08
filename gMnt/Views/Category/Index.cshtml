@@ -4,40 +4,14 @@
     ViewBag.Title = "Categories";
 }
 
+<h2>@Html.ActionLink("<-- Restaurant", "Index", "Restaurant")</h2>
 <h2>Categories</h2>
-<p>@Html.ActionLink("Create New", "Create")</p>
+
+<p>@Html.ActionLink("Create New", "Create", new { rid = @ViewBag.RestaurantId })</p>
 
 
-<table>
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Alien Name
-        </th>
-        <th>
-            Restaurant
-        </th>
-        <th></th>
-    </tr>
-
+<ul>
 @foreach (var item in Model) {
-    <tr class="items">
-        <td>
-            @Html.DisplayFor(modelItem => item.Bilingual.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bilingual.AlienName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Restaurant.Bilingual.FullName)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
-        </td>
-    </tr>
+    <li>@Html.ActionLink(item.Name, "Details", new { id=item.Id }) </li>
 }
-
-</table>
-
+</ul>

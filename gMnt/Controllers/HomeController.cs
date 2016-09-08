@@ -12,5 +12,10 @@ namespace gMnt.Controllers
         {
             return View();
         }
+
+       /* public ActionResult RestaurantList()
+        {
+            return 
+        } */
     }
 }
