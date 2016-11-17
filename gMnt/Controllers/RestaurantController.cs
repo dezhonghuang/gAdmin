@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -45,6 +44,8 @@ namespace gMnt.Controllers
 
         public ActionResult Create()
         {
+            MenuTypeDropDown();
+
             return View();
         }
 
@@ -84,6 +85,8 @@ namespace gMnt.Controllers
             }
             catch
             {
+                MenuTypeDropDown(restaurant.MenuType);
+
                 return View(restaurant);
             }
         }
@@ -113,6 +116,7 @@ namespace gMnt.Controllers
             //};
 
             var restaurant = _unitOfWork.GetRepository<Restaurant>().Get(r => r.Id == id, includeProperties: "Address").Single();
+            MenuTypeDropDown(restaurant.MenuType);
 
             return View(restaurant);
         }
@@ -176,6 +180,7 @@ namespace gMnt.Controllers
             catch
             {
                 ModelState.AddModelError("", "Invalid restaurant address");
+                MenuTypeDropDown(restaurant.MenuType);
 
                 return View(restaurant);
             }
@@ -235,18 +240,27 @@ namespace gMnt.Controllers
             return Json(streets, JsonRequestBehavior.AllowGet);
         }
 
-        private void PopulateDropDowns(object street = null, object suburb = null, object city = null, object state = null, object country = null)
+        private void MenuTypeDropDown(object menuType = null)
+        {
+            var menuTypes = from MenuType m in Enum.GetValues(typeof(MenuType))
+                            select new { Id = (int)m, Name = m.ToString() };
+
+            ViewBag.MenuTypeId = new SelectList(menuTypes, "Id", "Name", menuType);
+        }
+
+        /* private void PopulateDropDowns(object street = null, object suburb = null, object city = null, object state = null, object country = null, object menuType)
         {
             ViewBag.StreetId = new SelectList(_unitOfWork.GetRepository<Street>().Get(), "Id", "Name", street);
             ViewBag.SuburbId = new SelectList(_unitOfWork.GetRepository<Suburb>().Get(), "Id", "Name", suburb);
             ViewBag.CityId = new SelectList(_unitOfWork.GetRepository<City>().Get(), "Id", "Name", city);
             ViewBag.StateId = new SelectList(_unitOfWork.GetRepository<State>().Get(), "Id", "Name", state);
             ViewBag.CountryId = new SelectList(_unitOfWork.GetRepository<Country>().Get(), "Id", "Name", country);
+
         }
 
         private void SetTableViewBag(object table = null)
         {
             ViewBag.Tid = new SelectList(_unitOfWork.GetRepository<Table>().Get(), "Id", "TableNumber", table);
-        }
+        } */
     }
 }

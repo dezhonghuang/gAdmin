@@ -54,6 +54,13 @@
             </div>
         </div>
         <div class="line">
+            <div class="line-left">@Html.LabelFor(model => model.MenuType)</div>
+            <div class="line-right">
+                @Html.DropDownListFor(model => model.MenuType, (SelectList)ViewBag.MenuTypeId)
+                @Html.ValidationMessageFor(model => model.MenuType)
+            </div>
+        </div>
+        <div class="line">
             <div class="line-left">@Html.LabelFor(model => model.Logo)</div>
             <div class="line-right">
                 <input type="file" id="file" name="file" />
