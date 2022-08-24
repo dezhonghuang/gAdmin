@@ -1,0 +1,18 @@
+﻿@model IEnumerable<gLibrary.Models.Restaurant>
+
+@{
+    ViewBag.Title = "Restaurants";
+}
+
+<h2>Restaurants</h2>
+
+<p>
+    @Html.ActionLink("New", "Create")
+</p>
+
+    <ul>
+@foreach (var item in Model) {
+    <li>@Html.ActionLink(item.Bilingual.FullName, "Details", new { id=item.Id })</li>
+}
+        </ul>
+

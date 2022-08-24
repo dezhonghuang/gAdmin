@@ -1,10 +1,10 @@
 ﻿@model gLibrary.Models.Dish
 
 @{
-    ViewBag.Title = "Dish - Create";
+    ViewBag.Title = "New Dish";
 }
 
-<h2>Create Dish</h2>
+<h2>New Dish</h2>
 
 @using (Html.BeginForm("Create", "Dish", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <p>
+        <p class="delete-title">
             <input type="submit" value="Create" />
         </p>
     </fieldset>

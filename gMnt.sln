@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gMnt", "gMnt\gMnt.csproj", "{EDF6BF0F-C199-42E1-AF4D-33CD8A25A1E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gAdmin", "gMnt\gAdmin.csproj", "{EDF6BF0F-C199-42E1-AF4D-33CD8A25A1E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gLibrary", "..\gLibrary\gLibrary.csproj", "{69C8DBEF-82AD-476B-8947-3BE5DB0886C1}"
 EndProject

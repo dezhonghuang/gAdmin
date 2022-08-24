@@ -26,14 +26,14 @@ namespace gMnt
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                        "~/Content/site.css",
-                        "~/Content/gMnt.css",
+            bundles.Add(new StyleBundle("~/Content/desktopcss").Include(
+                        "~/Content/Desktop/Css/site.css",
+                        "~/Content/Desktop/Css/gMnt.css",
                         "~/Content/themes/base/jquery-ui.css"));
 
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //            "~/Content/site.css",
-            //            "~/Content/gMnt.css"));
+            bundles.Add(new StyleBundle("~/Content/mobilecss").Include(
+                        "~/Content/Mobile/Css/site.css",
+                        "~/Content/Mobile/Css/gMnt.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

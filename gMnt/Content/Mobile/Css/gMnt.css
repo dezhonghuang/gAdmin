@@ -1,0 +1,147 @@
+﻿/* general */
+
+
+.details {
+    border: 1px solid #000;
+    margin:20px 5px;
+    padding:20px;
+}
+
+/*  Dish Details */
+ul.dishes {
+    margin-left:15px;
+    padding:0;
+    min-width:300px;
+}
+
+ul.dishes li {
+    margin: 0;
+    padding:0;
+    background:none;
+}
+
+ul.dishes a {
+    line-height: 1em;
+    font-size:1em;
+    text-decoration:none;
+}
+
+.dish-line {
+    float: left;
+    width:100%;
+    font-size:0.7em;
+}
+
+.dish-line:hover {
+    background-color:#66ff66;
+}
+
+.dish-name {
+    width:30%;
+    float:left;
+}
+
+.dish-alien-name {
+    width:50%;
+    float:left;
+}
+
+.dish-price {
+    float:left;
+    text-align: right;
+    width:10%;
+}
+
+/* Line */
+.line {
+    display:inline-block;
+    width: 100%;
+}
+
+.r {
+    clear: both;
+}
+
+
+#bottom-bar {
+    position: fixed;
+    background-color: blue;
+}
+
+#dish-image {
+    margin-top: 10px;
+}
+
+img#image {
+    width: 160px;
+}
+
+.delete-title {
+    margin:20px 10px 10px 160px;
+}
+
+.main-content h2 {
+    margin-bottom: 20px;
+}
+
+/* all */
+.selected {
+    background-color: #808080;
+}
+
+.items {
+}
+
+    .items:hover {
+        background-color: #c5c5c5;
+    }
+
+#restaurant-details {
+    border: solid 1px #5f9be3;
+    margin-top:15px;
+}
+
+#page-header {
+    color: #000;
+    font-size: 1.75em;
+    font-weight: bold;
+    float:left;
+}
+
+.header-right {
+    float: right;
+}
+
+    .header-right a {
+        text-decoration: none;
+    }
+
+#btnedit {
+}
+
+#qr-content {
+    border: 1px solid #000;
+    margin:3px;
+    width:150px;
+    text-align: center;
+}
+
+    #qr-content img {
+        width: 120px;
+        text-align:center;
+    }
+
+p.qrcode-print {
+    font-size:1.5em;
+    font-weight:bold;
+}
+
+#logo-first {
+    color: #ff9900;
+}
+
+/* text area */
+
+#Introduction {
+    width: 160px;
+}

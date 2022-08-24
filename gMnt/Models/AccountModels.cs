@@ -74,7 +74,7 @@ namespace gMnt.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Email or Mobile Number")]
         public string UserName { get; set; }
 
         [Required]
@@ -92,6 +92,7 @@ namespace gMnt.Models
         [Display(Name = "Email Address")]
         public string Email { get; set; }
 
+        [Display(Name = "Restaurant")]
         public int? RestaurantId { get; set; }
 
         public DateTime CreateDate { get; set; }

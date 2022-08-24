@@ -66,6 +66,8 @@ namespace gMnt.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            //build restaurant id viewbag
+            ViewBag.RestaurantId = new SelectList(_unitOfWork.GetRepository<Restaurant>().Get(), "Id", "Bilingual.Name", gMnts.NoSelection);
             
             return View();
         }
@@ -85,9 +87,6 @@ namespace gMnt.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-
-                    //build restaurant id viewbag
-                    ViewBag.RestaurantId = new SelectList(_unitOfWork.GetRepository<Restaurant>().Get(), "Id", "Bilingual.Name", gMnts.NoSelection);
 
                     return RedirectToAction("Index", "Home");
                 }
